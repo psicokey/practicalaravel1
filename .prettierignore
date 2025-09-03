@@ -1,0 +1,12 @@
+# Dependencies
+/node_modules
+/vendor
+
+# Build artifacts
+/public/build
+
+# Laravel files
+/storage
+bootstrap/cache/*
+*.lock
+.env
