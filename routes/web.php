@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('question/{question}', [QuestionController::class, 'show'])->name('question.show');
+Route::delete('question/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy');
 
 Route::post('/answers/{question}', [AnswerController::class, 'store'])->name('answers.store');
+
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

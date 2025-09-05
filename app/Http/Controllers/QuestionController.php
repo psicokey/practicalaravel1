@@ -14,4 +14,11 @@ class QuestionController extends Controller
             'question' => $question,
         ]);
     }
+    public function destroy(Question $question)
+    {
+        // Aquí podrías agregar lógica para verificar permisos, etc.
+        $question->delete();
+
+        return redirect()->route('home');
+    }
 }
