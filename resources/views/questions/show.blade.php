@@ -47,7 +47,7 @@
 
         <li>
             <div class="flex items-start gap-2">
-                <livewire:heart :heartable="$answer" />
+                <livewire:heart :heartable="$answer" wire:key="answer-heart-{{$answer->id}}"/>
 
                 <div>
                     <p class="text-sm text-gray-300">
@@ -58,7 +58,7 @@
                     </p>
 
                     <!-- Comments -->
-                    <livewire:comment :commentable="$answer" />
+                    <livewire:comment :commentable="$answer" wire:key="answer-comment-{{$answer->id}}" />
                 </div>
             </div>
         </li>
