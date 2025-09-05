@@ -30,4 +30,27 @@ class Question extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($question) {
+
+            $question->hearts()->delete();
+
+            // Eliminar comentarios asociados
+            $question->comments()->get()->each (function ($comment) {
+                $comment->hearts()->delete();
+                $comment->delete();
+            });
+            // Eliminar respuestas asociadas
+            $question->answers()->get()->each(function ($answer) {
+                $answer->hearts()->delete();
+                // Eliminar comentarios de cada respuesta
+                $answer->comments()->get()->each(function ($comment) {
+                    $comment->hearts()->delete();
+                    $comment->delete();
+                });
+            });
+        });
+    }
 }
