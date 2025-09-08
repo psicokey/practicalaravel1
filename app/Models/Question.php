@@ -30,7 +30,12 @@ class Question extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+protected $fillable = [
+        'user_id',
+        'category_id',
+        'title',
+        'description',
+    ];
     protected static function booted()
     {
         static::deleting(function ($question) {
