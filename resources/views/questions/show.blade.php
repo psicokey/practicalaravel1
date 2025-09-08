@@ -15,7 +15,7 @@
                 </p>
 
                 <div class="flex items-center gap-2">
-                    <a href="#" class="text-xs font-semibold hover:underline">
+                    <a href="{{ route('question.edit', $question) }}" class="text-xs font-semibold hover:underline">
                         Edit
                     </a>
 
