@@ -6,6 +6,18 @@ use App\Models\Question;
 
 class QuestionController extends Controller
 {
+    public function index()
+    {
+        $questions = Question::with(['user', 'category'])
+            ->withCount('answers')
+            ->latest()
+            ->paginate(10);
+
+        return view('questions.index', [
+            'questions' => $questions,
+        ]);
+    }
+
     public function show(Question $question)
     {
         $userId = 20;

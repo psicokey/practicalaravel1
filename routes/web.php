@@ -9,6 +9,7 @@ use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('questions', [QuestionController::class, 'index'])->name('questions.index');
 Route::get('question/{question}', [QuestionController::class, 'show'])->name('question.show');
 Route::delete('question/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy');
 
