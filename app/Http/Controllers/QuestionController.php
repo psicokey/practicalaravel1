@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuestionRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Category;
 use App\Models\Question;
-use Illuminate\Http\Request;
+use App\Support\QuestionShowLoader;
 
 class QuestionController extends Controller
 {
@@ -26,13 +28,9 @@ class QuestionController extends Controller
             'categories' => $categories,
         ]);
     }
-    public function store(Request $request)
+    public function store(StoreQuestionRequest $request)
     {
-        $request->validate ([
-            'category_id' => 'required|exists:categories,id',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-        ]);
+
         $question = Question::create([
             'user_id' => auth()->id(),
             'category_id' => $request->category_id,
@@ -51,7 +49,7 @@ class QuestionController extends Controller
         ]);
     }
 
-    public function update(Question $question, Request $request)
+    public function update(UpdateQuestionRequest $question, Request $request)
     {
         $request->validate ([
             'category_id' => 'required|exists:categories,id',
@@ -67,29 +65,10 @@ class QuestionController extends Controller
         return redirect()->route('question.show', $question);
     }
 
-    public function show(Question $question)
+    public function show(Question $question, QuestionShowLoader $loader)
     {
-        $userId = auth()->id();
 
-        $question->load([
-            'user',
-            'category',
-            'answers' => fn ($query) => $query->with([
-                'user',
-                'hearts'=> fn ($query)=> $query->where('user_id', $userId),
-                'comments' => fn ($query) => $query->with([
-                    'user',
-                    'hearts' => fn ($query) => $query->where('user_id', $userId),
-                ]),
-
-            ]),
-            'comments' => fn ($query) => $query->with([
-                'user',
-                'hearts' => fn ($query) => $query->where('user_id', $userId),
-            ]),
-            'hearts' => fn ($query) => $query->where('user_id', $userId),
-        ]);
-
+        $loader->load($question);
         return view('questions.show', [
             'question' => $question,
         ]);
