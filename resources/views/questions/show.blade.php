@@ -16,9 +16,13 @@
                 @auth
 
                 <div class="flex items-center gap-2">
+                    @can('update', $question)
                     <a href="{{ route('question.edit', $question) }}" class="text-xs font-semibold hover:underline">
                         Edit
                     </a>
+                    @endcan
+
+                    @can('delete', $question)
 
                     <form action="{{ route('questions.destroy', $question) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar esta pregunta?');">
                         @csrf
@@ -27,8 +31,9 @@
                             Eliminar
                         </button>
                     </form>
-                    @endauth
+                    @endcan
                 </div>
+                @endauth
             </div>
         </div>
     </div>

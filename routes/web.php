@@ -16,10 +16,10 @@ Route::get('questions/create', [QuestionController::class, 'create'])->name('que
 Route::post('questions', [QuestionController::class, 'store'])->name('questions.store')->middleware('auth');
 
 Route::get('question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit')->middleware('auth');
-Route::put('question/{question}', [QuestionController::class, 'update'])->name('question.update')->middleware('auth');
+Route::put('question/{question}', [QuestionController::class, 'update'])->name('question.update')->middleware('auth', 'can:update,question');
 
 Route::get('question/{question}', [QuestionController::class, 'show'])->name('question.show');
-Route::delete('question/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy')->middleware('auth');
+Route::delete('question/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy')->middleware('auth', 'can:delete,question');
 
 Route::post('/answers/{question}', [AnswerController::class, 'store'])->name('answers.store')->middleware('auth');
 
