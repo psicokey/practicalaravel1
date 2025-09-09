@@ -21,6 +21,7 @@
     @endforeach
 
 </ul>
+@auth
 @if (!$showForm)
 <p class="text-gray-500">
     <a wire:click="toggle" class="rounded-md text-xs hover:underline cursor-pointer">
@@ -40,4 +41,5 @@
     @error('content') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
 </form>
 @endif
+@endauth
 </div>

@@ -17,7 +17,7 @@ class Comment extends Component
         ]);
         $this->commentable->comments()->create([
             'content' => $this->content,
-            'user_id' => 20,
+            'user_id' =>auth()->id(),
         ]);
         $this->reset ('content', 'showForm');
     }

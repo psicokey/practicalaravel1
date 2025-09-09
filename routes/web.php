@@ -12,16 +12,16 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 
 Route::get('questions', [QuestionController::class, 'index'])->name('questions.index');
 
-Route::get('questions/create', [QuestionController::class, 'create'])->name('questions.create');
-Route::post('questions', [QuestionController::class, 'store'])->name('questions.store');
+Route::get('questions/create', [QuestionController::class, 'create'])->name('questions.create')->middleware('auth');
+Route::post('questions', [QuestionController::class, 'store'])->name('questions.store')->middleware('auth');
 
-Route::get('question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit');
-Route::put('question/{question}', [QuestionController::class, 'update'])->name('question.update');
+Route::get('question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit')->middleware('auth');
+Route::put('question/{question}', [QuestionController::class, 'update'])->name('question.update')->middleware('auth');
 
 Route::get('question/{question}', [QuestionController::class, 'show'])->name('question.show');
-Route::delete('question/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy');
+Route::delete('question/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy')->middleware('auth');
 
-Route::post('/answers/{question}', [AnswerController::class, 'store'])->name('answers.store');
+Route::post('/answers/{question}', [AnswerController::class, 'store'])->name('answers.store')->middleware('auth');
 
 
 Route::view('dashboard', 'dashboard')

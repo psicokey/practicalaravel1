@@ -15,16 +15,16 @@ trait HasHeart{
         if ($this->relationLoaded('hearts')) {
             return $this->hearts->isNotEmpty();
         }
-        return $this->hearts()->where('user_id', 20)->exists();
+        return $this->hearts()->where('user_id', auth()->id())->exists();
     }
       public function heart()
     {
         $this->hearts()->create([
-            'user_id' => 20,
+            'user_id' => auth()->id(),
         ]);
         }
     public function unheart()
     {
-        $this->hearts()->where('user_id', 20)->delete();
+        $this->hearts()->where('user_id', auth()->id())->delete();
     }
 }
