@@ -5,7 +5,7 @@
 
         <div class="mb-4">
             <h2 class="text-2xl font-bold">
-                <a href="{{ route('question.show', $question) }}" class="hover:underline">
+                <a href="{{ route('questions.show', $question) }}" class="hover:underline">
                     {{ $question->title }}
                 </a>
             </h2>

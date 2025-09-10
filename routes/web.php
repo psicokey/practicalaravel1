@@ -10,19 +10,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 
-Route::get('questions', [QuestionController::class, 'index'])->name('questions.index');
+Route::get('foro', [QuestionController::class, 'index'])->name('questions.index');
 
-Route::get('questions/create', [QuestionController::class, 'create'])->name('questions.create')->middleware('auth');
-Route::post('questions', [QuestionController::class, 'store'])->name('questions.store')->middleware('auth');
+Route::get('foro/crear', [QuestionController::class, 'create'])->name('questions.create')->middleware('auth');
+Route::post('foro', [QuestionController::class, 'store'])->name('questions.store')->middleware('auth');
 
-Route::get('question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit')->middleware('auth');
-Route::put('question/{question}', [QuestionController::class, 'update'])->name('question.update')->middleware('auth', 'can:update,question');
+Route::get('foro/{question:slug}/editar', [QuestionController::class, 'edit'])->name('questions.edit')->middleware('auth');
+Route::put('foro/{question:slug}', [QuestionController::class, 'update'])->name('questions.update')->middleware('auth', 'can:update,question');
 
-Route::get('question/{question}', [QuestionController::class, 'show'])->name('question.show');
-Route::delete('question/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy')->middleware('auth', 'can:delete,question');
+
+
+Route::get('foro/{question:slug}', [QuestionController::class, 'show'])->name('questions.show');
+Route::delete('questions/{question:slug}', [QuestionController::class, 'destroy'])->name('questions.destroy')->middleware('auth', 'can:delete,question');
+
+
 
 Route::post('/answers/{question}', [AnswerController::class, 'store'])->name('answers.store')->middleware('auth');
-
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

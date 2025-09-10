@@ -1,5 +1,5 @@
 <x-forum.layouts.app>
-    <form action="{{ route('question.update', $question) }}" method="POST" class="max-w-2xl mx-auto p-6">
+    <form action="{{ route('questions.update', $question) }}" method="POST" class="max-w-2xl mx-auto p-6">
         @csrf
         @method('PUT')
 
