@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\PostController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -26,6 +27,11 @@ Route::delete('questions/{question:slug}', [QuestionController::class, 'destroy'
 
 
 Route::post('/answers/{question}', [AnswerController::class, 'store'])->name('answers.store')->middleware('auth');
+
+
+Route::resource('posts', PostController::class)
+    ->parameters(['posts' => 'post:slug']);
+
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

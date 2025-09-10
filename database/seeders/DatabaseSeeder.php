@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Answer;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Post;
 use App\Models\Question;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -46,5 +47,7 @@ class DatabaseSeeder extends Seeder
             'commentable_id' => fn () => $questions->random()->id,
             'commentable_type' => Question::class,
         ]);
+
+        Post::factory(20)->create();
     }
 }

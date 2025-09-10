@@ -16,9 +16,10 @@
         "vite": "^7.0.4"
     },
     "devDependencies": {
-        "prettier": "^3.2.5",
         "@prettier/plugin-php": "^0.22.2",
-        "@shufo/prettier-plugin-blade": "^1.14.1"
+        "@shufo/prettier-plugin-blade": "^1.14.1",
+        "@tailwindcss/typography": "^0.5.16",
+        "prettier": "^3.2.5"
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "4.9.5",
